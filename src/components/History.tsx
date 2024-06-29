@@ -31,8 +31,6 @@ export const History = ({ history, setHistory }: Props) => {
     dayjs(new Date().toLocaleString())
   );
 
-  console.log("HISTORY DATA", history);
-
   const handleInputChange = (e: Dayjs | null, task: TaskHistory) => {
     if (!e) return;
     const value = e.toDate();

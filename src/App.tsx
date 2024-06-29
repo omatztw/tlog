@@ -24,15 +24,17 @@ const parseJSON = (json: string) => {
   });
 };
 
+const localStorageKey = "tlog-history";
+
 export default function App() {
   const [value, setValue] = useState(0);
   const [currentTask, setCurrentTask] = useState("");
   const [history, _setHistory] = useState<TaskHistory[]>(() => {
-    const his = localStorage.getItem("history");
+    const his = localStorage.getItem(localStorageKey);
     return his ? (parseJSON(his) as TaskHistory[]) : [];
   });
   const [taskList, setTaskList] = usePersistState<string[]>({
-    key: "taskList",
+    key: "tlog-taskList",
     initialValue: [],
   });
 
@@ -48,7 +50,7 @@ export default function App() {
   };
 
   const saveHistory = (history: TaskHistory[]) => {
-    localStorage.setItem("history", JSON.stringify(history));
+    localStorage.setItem(localStorageKey, JSON.stringify(history));
   };
 
   const setHistory = (history: TaskHistory[]) => {
